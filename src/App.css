@@ -271,39 +271,30 @@ body {
 }
 
 .table-wrapper{
-
-  overflow-x:auto;
-
+  width:100%;
+  overflow:auto;
+  max-height:70vh;
+  border-radius:12px;
 }
 
 .resident-table{
-
-  width:100%;
-
   border-collapse:collapse;
-
-  min-width:900px;
-
+  min-width:1100px;
+  width:max-content;
 }
 
 .resident-table th{
-
   background:#2563eb;
-
   color:white;
-
   padding:12px;
-
+  border:0;
 }
 
 .resident-table td{
-
   padding:12px;
-
   text-align:center;
-
   border-bottom:1px solid #eee;
-
+  background:white;
 }
 
 .resident-table td:nth-child(2){
@@ -311,12 +302,99 @@ body {
   text-align:left;
 
 }
+/* ===========================
+   HEADER STICKY
+=========================== */
 
-.resident-table tr:hover{
+.resident-table thead th{
+  position: sticky;
+  top: 0;
+  background: #2196f3;
+  color: white;
+  z-index: 100;
+}
 
+/* ==========================
+   STICKY FIRST COLUMN
+========================== */
+
+.resident-table td:first-child{
+  position: sticky;
+
+  left: 0;
+
+  background: white;
+
+  z-index: 80;
+
+}
+
+/* ==========================
+   STICKY SECOND COLUMN
+========================== */
+
+.resident-table td:nth-child(2){
+
+  position: sticky;
+
+  left: 60px;
+
+  background: white;
+
+  z-index: 80;
+
+}
+
+/* ==========================
+   STICKY THIRD COLUMN
+========================== */
+
+.resident-table td:nth-child(3){
+
+  position: sticky;
+
+  left: 140px;
+
+  background: white;
+
+  z-index: 80;
+
+}
+
+/* ==========================
+   HEADER FIRST COLUMN
+========================== */
+
+.resident-table thead th:first-child{
+
+  background:#2196f3;
+
+  color:white;
+
+  z-index:120;
+
+}
+
+.resident-table thead th:first-child{
+    left:0;
+    z-index:120;
+}
+
+.resident-table thead th:nth-child(2){
+    left:60px;
+    z-index:120;
+}
+
+.resident-table thead th:nth-child(3){
+    left:140px;
+    z-index:120;
+}
+
+.resident-table tbody tr:hover td{
   background:#f8fafc;
+}
 
-}/*************************************************
+/*************************************************
 
             UI POLISH V1
 
@@ -1032,5 +1110,31 @@ DOWNLOAD PDF BUTTON
 .download-btn:active{
 
     transform:scale(.97);
+
+}
+
+/* ========================================
+   FIX DARK MODE HP
+======================================== */
+
+input,
+select,
+textarea{
+
+    color:#111827 !important;
+    background:#ffffff !important;
+
+}
+
+option{
+
+    color:#111827 !important;
+    background:#ffffff !important;
+
+}
+
+button{
+
+    color:white;
 
 }
