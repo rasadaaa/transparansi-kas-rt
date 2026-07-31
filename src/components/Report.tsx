@@ -6,6 +6,7 @@ type ReportItem = {
   masuk: number;
   keluar: number;
   saldo: number;
+  linkBukti: string;
 };
 
 type ReportData = {
@@ -67,14 +68,11 @@ function Report({
             <tr>
 
               <th>Tanggal</th>
-
               <th>Keterangan</th>
-
               <th>Masuk</th>
-
               <th>Keluar</th>
-
               <th>Saldo</th>
+              <th>Bukti</th>
 
             </tr>
 
@@ -103,6 +101,26 @@ function Report({
                 </td>
 
                 <td>{rupiah(item.saldo)}</td>
+
+                <td>
+
+                  {item.linkBukti ? (
+
+                    <a
+                      href={item.linkBukti}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      📷 Lihat
+                    </a>
+
+                  ) : (
+
+                    "-"
+
+                  )}
+
+                </td>
 
               </tr>
 
@@ -145,7 +163,8 @@ function Report({
       </div>
 
       <br />
-            <button
+
+      <button
         className="download-btn"
         onClick={() =>
           downloadReportPDF(
