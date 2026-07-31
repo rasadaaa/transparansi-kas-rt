@@ -37,6 +37,7 @@ export type ReportItem = {
   masuk: number;
   keluar: number;
   saldo: number;
+  linkBukti: string;
 };
 
 export type ReportData = {
