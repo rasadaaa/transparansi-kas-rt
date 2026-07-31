@@ -5,7 +5,7 @@ import axios from "axios";
  ************************************************/
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbwmb7OPb-HyxW2-Yw2weAZ3RyDxebzxV8Y-euUB_lsEj2JI8ogwIfAryHFKvQOHJlyD5Q/exec";
+  "https://script.google.com/macros/s/AKfycbzETRfwkKAwMc94qDi_xAmpJCQ6ES7uLdK9wwHOh01IsUTPZhyh6pDdoM2VlKQhBTZM/exec";
 
 /************************************************
  * DASHBOARD
