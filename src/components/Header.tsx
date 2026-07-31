@@ -14,7 +14,18 @@ function Header({
 
       <div className="logo">
 
-        <h2>🏡 Transparansi Kas RT</h2>
+        <h2>🏡 Transparansi Kas RT 12</h2>
+
+        <p
+          style={{
+            margin: 0,
+            fontSize: "14px",
+            color: "#6b7280",
+            fontWeight: 500,
+          }}
+        >
+          Perumahan Griya Bukit Intan
+        </p>
 
       </div>
 
