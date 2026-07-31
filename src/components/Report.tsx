@@ -1,3 +1,4 @@
+import BuktiTransaksi from "./BuktiTransaksi";
 import { downloadReportPDF } from "../utils/pdf";
 
 type ReportItem = {
@@ -32,11 +33,13 @@ function rupiah(nominal: number) {
 }
 
 function formatTanggal(value: string) {
+
   const d = new Date(value);
 
   if (isNaN(d.getTime())) return value;
 
   return d.toLocaleDateString("id-ID");
+
 }
 
 function Report({
@@ -47,137 +50,134 @@ function Report({
 
   return (
 
-    <section className="resident-card">
+    <>
 
-      <h2>📄 Laporan Keuangan</h2>
+      <section className="resident-card">
 
-      <br />
+        <h2>📄 Laporan Keuangan</h2>
 
-      <h3>Saldo Awal</h3>
+        <br />
 
-      <h2>{rupiah(report.saldoAwal)}</h2>
+        <h3>Saldo Awal</h3>
 
-      <br />
+        <h2>{rupiah(report.saldoAwal)}</h2>
 
-      <div className="table-wrapper">
+        <br />
 
-        <table className="resident-table">
+        <div className="table-wrapper">
 
-          <thead>
+          <table className="resident-table">
 
-            <tr>
+            <thead>
 
-              <th>Tanggal</th>
-              <th>Keterangan</th>
-              <th>Masuk</th>
-              <th>Keluar</th>
-              <th>Saldo</th>
-              <th>Bukti</th>
+              <tr>
 
-            </tr>
+                <th>Tanggal</th>
 
-          </thead>
+                <th>Keterangan</th>
 
-          <tbody>
+                <th>Masuk</th>
 
-            {report.transaksi.map((item, index) => (
+                <th>Keluar</th>
 
-              <tr key={index}>
-
-                <td>{formatTanggal(item.tanggal)}</td>
-
-                <td>{item.keterangan}</td>
-
-                <td>
-                  {item.masuk === 0
-                    ? "-"
-                    : rupiah(item.masuk)}
-                </td>
-
-                <td>
-                  {item.keluar === 0
-                    ? "-"
-                    : rupiah(item.keluar)}
-                </td>
-
-                <td>{rupiah(item.saldo)}</td>
-
-                <td>
-
-                  {item.linkBukti ? (
-
-                    <a
-                      href={item.linkBukti}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      📷 Lihat
-                    </a>
-
-                  ) : (
-
-                    "-"
-
-                  )}
-
-                </td>
+                <th>Saldo</th>
 
               </tr>
 
-            ))}
+            </thead>
 
-          </tbody>
+            <tbody>
 
-        </table>
+              {report.transaksi.map((item,index)=>(
 
-      </div>
+                <tr key={index}>
+
+                  <td>{formatTanggal(item.tanggal)}</td>
+
+                  <td>{item.keterangan}</td>
+
+                  <td>
+
+                    {item.masuk===0
+                      ? "-"
+                      : rupiah(item.masuk)}
+
+                  </td>
+
+                  <td>
+
+                    {item.keluar===0
+                      ? "-"
+                      : rupiah(item.keluar)}
+
+                  </td>
+
+                  <td>{rupiah(item.saldo)}</td>
+
+                </tr>
+
+              ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+        <br />
+
+        <div className="summary-grid">
+
+          <div className="card pemasukan">
+
+            <h3>Total Pemasukan</h3>
+
+            <h2>{rupiah(report.totalMasuk)}</h2>
+
+          </div>
+
+          <div className="card pengeluaran">
+
+            <h3>Total Pengeluaran</h3>
+
+            <h2>{rupiah(report.totalKeluar)}</h2>
+
+          </div>
+
+          <div className="card akhir">
+
+            <h3>Saldo Akhir</h3>
+
+            <h2>{rupiah(report.saldoAkhir)}</h2>
+
+          </div>
+
+        </div>
+
+        <br />
+
+        <button
+          className="download-btn"
+          onClick={() =>
+            downloadReportPDF(
+              report,
+              bulan,
+              tahun
+            )
+          }
+        >
+          📄 Download PDF
+        </button>
+
+      </section>
 
       <br />
 
-      <div className="summary-grid">
+      <BuktiTransaksi
+        transaksi={report.transaksi}
+      />
 
-        <div className="card pemasukan">
-
-          <h3>Total Pemasukan</h3>
-
-          <h2>{rupiah(report.totalMasuk)}</h2>
-
-        </div>
-
-        <div className="card pengeluaran">
-
-          <h3>Total Pengeluaran</h3>
-
-          <h2>{rupiah(report.totalKeluar)}</h2>
-
-        </div>
-
-        <div className="card akhir">
-
-          <h3>Saldo Akhir</h3>
-
-          <h2>{rupiah(report.saldoAkhir)}</h2>
-
-        </div>
-
-      </div>
-
-      <br />
-
-      <button
-        className="download-btn"
-        onClick={() =>
-          downloadReportPDF(
-            report,
-            bulan,
-            tahun
-          )
-        }
-      >
-        📄 Download PDF
-      </button>
-
-    </section>
+    </>
 
   );
 
