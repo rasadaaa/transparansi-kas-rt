@@ -27,22 +27,11 @@ function formatTanggal(value: string) {
   return d.toLocaleDateString("id-ID");
 }
 
-function getImageUrl(url: string) {
-  if (!url) return "";
-
-  return url.replace(
-    "uc?export=view&id=",
-    "thumbnail?id="
-  ) + "&sz=w1200";
-}
-
 function BuktiTransaksi({ transaksi }: Props) {
 
+  // TAMPILKAN SEMUA PENGELUARAN
   const dataBukti = transaksi.filter(
-    (item) =>
-      item.keluar > 0 &&
-      item.linkBukti &&
-      item.linkBukti !== ""
+    (item) => item.keluar > 0
   );
 
   if (dataBukti.length === 0) {
@@ -76,11 +65,27 @@ function BuktiTransaksi({ transaksi }: Props) {
             {item.keterangan}
           </p>
 
-          <img
-            src={getImageUrl(item.linkBukti)}
-            alt={item.keterangan}
-            className="bukti-image"
-          />
+          {item.linkBukti ? (
+
+            <img
+              src={item.linkBukti}
+              alt={item.keterangan}
+              className="bukti-image"
+            />
+
+          ) : (
+
+            <div className="no-bukti">
+
+              <h4>📄 Tidak ada dokumentasi foto</h4>
+
+              <p>
+                Pembayaran dilakukan secara tunai.
+              </p>
+
+            </div>
+
+          )}
 
         </div>
 
